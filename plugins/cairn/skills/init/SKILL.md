@@ -53,7 +53,7 @@ Generated blocks sit between `<!-- cairn:start -->` and `<!-- cairn:end -->`. Re
 
 ## 6. Verify
 Run these checks and report each result honestly:
-1. `grep -rn '{{' AGENTS.md CLAUDE.md .claude/` finds nothing.
+1. `grep -rn '{{' AGENTS.md CLAUDE.md .claude/ --exclude-dir=templates` finds nothing (skeletons in `.claude/templates/` keep theirs).
 2. Every `.claude/rules/*.md` has at most 50 lines (`wc -l`).
 3. `.claude/cairn.json` and `.claude/settings.json` parse (`jq empty`, or `python3 -m json.tool`).
 4. Level 2: hooks are executable and `bash -n` passes on each.
