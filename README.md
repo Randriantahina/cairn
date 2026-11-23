@@ -6,6 +6,9 @@ Cairn sets up an AI-assisted project in one command: short, checkable **rules**,
 
 **Status:** design phase. See [`DESIGN.md`](./DESIGN.md).
 
+## Why the name
+A cairn is a small stack of stones that hikers leave along a trail so the next person can find the way. That is exactly the job here: each session leaves rules, a status and a next action behind, so the next session (yours, a teammate's, an AI's) picks up the path instead of starting from zero. Stack the stones once, and the trail stays visible.
+
 ## Why
 - A new session starts with zero context. Cairn gives it back from files, not from hope.
 - Rules beat prompts you retype. But too many or too vague rules get ignored, so Cairn generates few, short, verifiable ones.
