@@ -24,6 +24,8 @@
 | `ROADMAP_ITEMS` | spec items as `- [ ]`, or empty | |
 | `FIRST_ACTION` | first roadmap item or "define the first phase" | |
 | `HOOKS_NOTE` | `, hooks` at level 2, otherwise empty | |
+| `PHP_VERSION` / `NODE_VERSION` | `composer.json` require / `.nvmrc` or `engines`, else ask | `8.3` / `20` |
+| `INSTALL_COMMAND` / `LINT_COMMAND` | package manager's frozen install, detected lint | `pnpm install --frozen-lockfile` |
 | `DATE` | today, `YYYY-MM-DD` | |
 
 ## Filled later (skeletons in `.claude/templates/`)
