@@ -1,0 +1,17 @@
+{
+  "_comment": "Level 1, always added. Git read access and committing are allowed; pushing depends on the push policy (see init).",
+  "allow": [
+    "Bash(git status*)", "Bash(git diff*)", "Bash(git log*)", "Bash(git branch*)",
+    "Bash(git add *)", "Bash(git commit *)"
+  ],
+  "deny": [
+    "Read(./.env)", "Read(./.env.*)", "Read(./secrets/**)",
+    "Bash(git push --force*)", "Bash(git push -f*)", "Bash(git reset --hard*)",
+    "Bash(rm -rf /*)", "Bash(rm -rf ~*)"
+  ],
+  "pushPolicy": {
+    "never": { "deny": ["Bash(git push*)"] },
+    "after-green": { "allow": ["Bash(git push origin *)"] },
+    "ask": { "ask": ["Bash(git push*)"] }
+  }
+}

@@ -44,7 +44,7 @@ Order: `cairn.json`, memory, rules, `AGENTS.md`, `CLAUDE.md`, then level 1 and 2
 - `.claude/cairn.json`: all answers plus `"cairnVersion"` (from `plugin.json`) and `"level"`.
 - `.claude/memory/`: `status.md`, `roadmap.md`, `architecture.md` from `templates/memory/`; copy `phase.md`, `decision.md`, `task.md` to `.claude/templates/` as skeletons.
 - `.claude/rules/` (flat): `core/*` as `<name>.md`; the chosen `git/` flow plus `commits-conventional.md`; the chosen backend and frontend architecture as `backend.md` and `frontend.md`.- `AGENTS.md` and `CLAUDE.md`: from the templates. `CLAUDE.md` only imports `@AGENTS.md`.
-- Level 1: `.claude/settings.json` permissions. Allow the real commands (package manager, test, lint, git read/commit). **Deny** every package manager that was not chosen, secret files (`.env*`), and force-push.
+- Level 1: `.claude/settings.json` `permissions`, built from `templates/permissions/`. Start from `base.json` (apply the `pushPolicy` entry matching the answer, then drop the `pushPolicy` key), add the chosen manager's `allow` from `package-managers.json`, and add `Bash(<name> *)` to deny for every other manager of the same ecosystem. Add the detected test and lint commands to allow. In a monorepo, do this per side. Strip all `_comment` keys.
 - Level 2: copy `templates/hooks/*.sh` to `.claude/hooks/`, `chmod +x`, and register in `.claude/settings.json`: `SessionStart` runs `session-start.sh`; `PreToolUse` with matcher `Bash` runs `guard-commit.sh`, both via `"$CLAUDE_PROJECT_DIR/.claude/hooks/..."`. Copied, not referenced from the plugin, so the project stays self-contained. State in the summary that hooks need bash and jq and fail open without jq.
 - CI starter only if asked.
 

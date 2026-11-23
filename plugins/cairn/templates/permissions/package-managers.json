@@ -1,0 +1,14 @@
+{
+  "_comment": "Level 1. For the chosen manager, add its 'allow'. For every other manager of the SAME ecosystem, add 'Bash(<name> *)' to deny, so a second lockfile never appears.",
+  "npm":      { "ecosystem": "js",     "allow": ["Bash(npm install*)", "Bash(npm ci)", "Bash(npm run *)", "Bash(npm test*)", "Bash(npx *)"] },
+  "pnpm":     { "ecosystem": "js",     "allow": ["Bash(pnpm install*)", "Bash(pnpm run *)", "Bash(pnpm test*)", "Bash(pnpm exec *)", "Bash(pnpm dlx *)"] },
+  "yarn":     { "ecosystem": "js",     "allow": ["Bash(yarn install*)", "Bash(yarn run *)", "Bash(yarn test*)", "Bash(yarn dlx *)"] },
+  "bun":      { "ecosystem": "js",     "allow": ["Bash(bun install*)", "Bash(bun run *)", "Bash(bun test*)", "Bash(bunx *)"] },
+  "composer": { "ecosystem": "php",    "allow": ["Bash(composer install*)", "Bash(composer require *)", "Bash(composer run *)", "Bash(composer test*)", "Bash(php artisan *)"] },
+  "pip":      { "ecosystem": "python", "allow": ["Bash(pip install*)", "Bash(python -m *)", "Bash(pytest*)"] },
+  "uv":       { "ecosystem": "python", "allow": ["Bash(uv sync*)", "Bash(uv add *)", "Bash(uv run *)"] },
+  "poetry":   { "ecosystem": "python", "allow": ["Bash(poetry install*)", "Bash(poetry add *)", "Bash(poetry run *)"] },
+  "cargo":    { "ecosystem": "rust",   "allow": ["Bash(cargo build*)", "Bash(cargo test*)", "Bash(cargo clippy*)", "Bash(cargo fmt*)", "Bash(cargo add *)"] },
+  "go":       { "ecosystem": "go",     "allow": ["Bash(go build*)", "Bash(go test*)", "Bash(go vet*)", "Bash(go mod *)"] },
+  "flutter":  { "ecosystem": "dart",   "allow": ["Bash(flutter pub *)", "Bash(flutter test*)", "Bash(flutter analyze*)", "Bash(dart *)"] }
+}
