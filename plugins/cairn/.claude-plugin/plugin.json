@@ -1,0 +1,9 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "cairn",
+  "version": "0.1.0",
+  "description": "Set up and sync short, checkable rules, a split project memory and optional guardrails for AI-assisted projects",
+  "author": { "name": "Randriantahina" },
+  "license": "MIT",
+  "skills": ["./skills/init", "./skills/sync"]
+}

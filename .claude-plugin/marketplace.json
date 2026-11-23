@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "cairn",
+  "description": "Cairn: short, checkable rules and a split project memory for AI-assisted projects",
+  "owner": { "name": "Randriantahina" },
+  "plugins": [
+    {
+      "name": "cairn",
+      "source": "./plugins/cairn",
+      "description": "Set up (and keep in sync) rules, project memory and optional guardrails tailored to your stack, git flow and tooling"
+    }
+  ]
+}
