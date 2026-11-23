@@ -16,12 +16,22 @@ Templates live in `${CLAUDE_PLUGIN_ROOT}/templates/`. A plugin cannot ship `rule
 Collect: lockfiles and manifests (`composer.json`, `package.json`, `pubspec.yaml`, `Cargo.toml`, `go.mod`, `pyproject.toml`), top-level folders (`app/`, `src/`, `lib/`, `frontend/`, `backend/`), `git branch -a`, `.github/workflows`, existing `.claude/`, `AGENTS.md`, `CLAUDE.md`, and the size signal (file count, number of models/tables).
 Summarise what was found in 3 lines. A detected value becomes the recommended default; do not ask about it unless it is ambiguous.
 
+**Layout (same folder or not).** Look for one manifest at the root, or several in sub-folders (`backend/composer.json` + `frontend/package.json`, `apps/*`, `packages/*`). Classify each manifest as backend or frontend by its dependencies (laravel, express, django = backend; react, vue, flutter, svelte = frontend).
+- One manifest at root: single-side project; `{{BACKEND_PATH}}` or `{{FRONTEND_PATH}}` is empty.
+- Backend and frontend manifests in one repo: monorepo. Record each path (`backend/`, `frontend/`) in `cairn.json`; the architecture rules are path-scoped to them, each with its own package manager and commands.
+- Same manifest holds both (Laravel + Inertia/Vue, Next.js): one root, two path-scoped rules (`app/`, `resources/js/`).
+Ask only if the classification is unclear.
+
+**Spec.** Look for `SPEC.md`, `PRD.md`, `docs/spec*`, `specs/`, `openapi.*`, `requirements*`, or a spec path in `README.md`.
+- **Spec found: spec mode.** Read it and derive every answer it settles (stack, architecture, size, scope, language). Ask only what it leaves open, and the questions it cannot answer (git flow, push policy, level). Spec items become checkboxes in `roadmap.md`. Priority: spec, then rules, then judgment; on conflict stop and ask.
+- **No spec: ask mode.** Run the rounds below. Add to `AGENTS.md` that, before each task, the agent asks at most three questions (goal, scope, done-criteria) and writes the answers to `.claude/memory/tasks/`.
+
 ## 2. Questions: 3 rounds maximum
 Use AskUserQuestion. Each question: recommended option first and marked "(Recommended)", free text always possible via "Other". Skip any question already settled by detection. A first option "Accept all defaults" ends the rounds early.
 
 - **Round 1, shape**: layout (one repo / separate / one side), stack, backend architecture, frontend structure, size (small / medium / large).
 - **Round 2, tooling and git**: package manager, test and lint commands, git flow (trunk / dev+main / GitHub Flow / git-flow), commit convention and commit language, push policy (never auto / after green tests / ask), CI (none / GitHub Actions / GitLab CI; offer a starter).
-- **Round 3, working mode**: spec path or no spec, language of rules and memory, enforcement level (0 markdown, 1 + permissions, 2 + hooks).
+- **Round 3, working mode**: language of rules and memory, enforcement level (0 markdown, 1 + permissions, 2 + hooks).
 
 Proportional rigor: small project means simple-layered and a lean rule set; DDD is offered only for medium and large. Never recommend more than the size justifies.
 
